@@ -3,9 +3,15 @@ import { Button, Container, Nav, NavDropdown, Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider'
 import { FaUserCircle } from 'react-icons/fa'
+// import { auth } from 'firebase/auth'
 
 const NavigationBar = () => {
-  const { user } = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext)
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch(error => console.error(error))
+  }
   return (
     <div>
       <Container>
@@ -30,7 +36,9 @@ const NavigationBar = () => {
                   <FaUserCircle style={{ fontSize: '2rem' }}></FaUserCircle>
                 )}
                 {user ? (
-                  <Button variant='dark'>Logout</Button>
+                  <Button onClick={handleLogOut} variant='dark'>
+                    Logout
+                  </Button>
                 ) : (
                   <Link to='/login'>
                     <Button variant='dark'>Login</Button>
